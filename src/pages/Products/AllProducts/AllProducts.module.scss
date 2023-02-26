@@ -1,0 +1,245 @@
+.products {
+  margin-left: 100px;
+  margin-right: 100px;
+  align-items: center;
+  justify-content: center;
+
+  &_card {
+    width: calc(33% - 10px) !important;
+  }
+
+  &_row {
+    flex-direction: row;
+    gap: 1rem;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+
+    &_col {
+      flex: 0 0 auto;
+      width: calc(33% - 10px) !important;
+
+      & div {
+        width: 100% !important;
+        height: auto !important;
+
+        & img {
+          object-fit: cover !important;
+        }
+
+      }
+    }
+
+  }
+
+}
+
+.top_text {
+  width: 600px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 180%;
+  text-align: center;
+  color: #AFADB5;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+}
+
+.menu {
+  flex-direction: row;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 79px;
+
+  &_lupa_name {
+    margin-right: auto;
+
+    &::placeholder {
+      color: #AFADB5;
+    }
+  }
+
+  &_filter {
+    margin-left: 110px;
+
+    &_name {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 180%;
+      color: #151411;
+      margin-left: 12px;
+    }
+  }
+
+}
+
+.total {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 130%;
+  color: #151411;
+  margin-top: 51px;
+
+  &_num {
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 10px;
+    width: 60px;
+    height: 30px;
+    background: #F9F9F9;
+    border-radius: 20px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 130%;
+    color: #518581;
+  }
+}
+
+@media (max-width: 1000px) {
+  .products {
+    margin: 24px;
+
+    &_row {
+      gap: 15px;
+
+      &_col {
+        width: calc(50% - 10px) !important;
+
+        & div {
+
+          & img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+
+  .top_text {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .menu {
+    margin-top: 32px;
+    flex-direction: column;
+
+    &_filter {
+      margin-left: 0px;
+      width: 20px;
+
+      &_name {
+        font-size: 14px;
+      }
+    }
+
+    &_lupa_name {
+      width: auto;
+      min-width: 100px;
+      height: 25px;
+      padding-left: 15px;
+      font-size: 14px;
+      margin-right: auto;
+    }
+  }
+
+  .search {
+    height: 54px;
+    width: 100%;
+    background-color: white;
+    padding: 8px;
+    margin-bottom: 16px;
+
+    & button img {
+      width: 24px;
+    }
+  }
+
+  .filter {
+    height: 54px;
+    width: 100%;
+    background-color: white;
+    padding: 11.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button_find_now {
+    width: 100px;
+    height: 36px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 54px;
+    gap: 10px;
+
+    & span {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 130%;
+      text-align: center;
+    }
+  }
+
+  .total {
+
+    &_title {
+      font-size: 18px;
+    }
+
+    &_num {
+      font-size: 12px;
+    }
+
+  }
+
+  .proucts_card div span {
+
+    &:nth-child(1) {
+      font-size: 12px;
+    }
+
+    &:nth-child(2) {
+      font-size: 14px;
+    }
+
+    &:nth-child(3) {
+      font-size: 12px;
+    }
+
+    &:nth-child(4) {
+      font-size: 14px;
+    }
+  }
+}

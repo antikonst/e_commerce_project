@@ -1,0 +1,25 @@
+.product {
+  margin: 100px;
+
+  &_related {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 130%;
+    color: #151411;
+    margin-top: 50px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .product {
+    margin: 50px 24px;
+
+    &_related {
+      font-size: 18px;
+      margin-top: 0px;
+      margin-bottom: 23px;
+    }
+  }
+}

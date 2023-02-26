@@ -1,0 +1,17 @@
+.pathname {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 130%;
+  text-align: center;
+  color: #151411;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1000px) {
+  .pathname {
+    font-size: 26px;
+    margin-top: 50px;
+  }
+}

@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'Eudoxus Sans';
+  src: url('../../styles/EudoxusSans/EudoxusSans-Bold.woff2') format('woff2'),
+    url('../../styles/EudoxusSans/EudoxusSans-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+.button {
+  height: 55px;
+  background-color: #518581;
+  padding-left: 28px;
+  padding-right: 28px;
+  border: none;
+  color: white;
+  font-family: 'Eudoxus Sans' !important;
+  //font-family: Roboto;
+  //font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: .1px;
+  line-height: 120%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.button_loader {
+  padding-left: 20px;
+  //margin-left: 10px;
+}
+
+.btnLoader {
+  border-color: white !important;
+  border-left-color: rgba(0, 0, 0, 0) !important;
+  float: left;
+  margin-right: 17.4px;
+}
+
+.btnChild {
+  display: flex;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.button_disabled {
+  background: rgba(217, 217, 217, 1);
+  //cursor: not-allowed;
+}
+
+.button_disabled:hover {
+  opacity: 1;
+}
+
+// .button_loader:hover {
+//   opacity: 0.8 !important;
+// }

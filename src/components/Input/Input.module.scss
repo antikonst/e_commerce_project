@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Eudoxus Sans';
+  src: url('../../styles/EudoxusSans/EudoxusSans-Bold.woff2') format('woff2'),
+    url('../../styles/EudoxusSans/EudoxusSans-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+.input {
+  &_disabled {
+    cursor: not-allowed;
+  }
+
+  width: 337px;
+  height: 80px;
+  padding-left: 27px;
+  font-family: 'Eudoxus Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 180%;
+  color: #AFADB5;
+border-radius: 0px;
+  border: 1px solid #ffffff;
+  background: #FFFFFF;
+box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
+}
+
+.input:focus {
+  border: 1px solid #518581;
+}

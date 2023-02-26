@@ -1,0 +1,22 @@
+@import './EudoxusSans/fonts';
+
+html, body {
+  font-family: 'Eudoxus Sans';
+  margin: 0;
+  background-color: #F5F5F5;;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.hidden.element-show {
+  opacity: 1;
+  transition: all 1.5s;
+  transform: translateY(0%);
+}
