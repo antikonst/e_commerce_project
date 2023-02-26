@@ -51,6 +51,12 @@
   display: flex;
   align-items: center;
   margin-right: auto;
+  background-color: white;
+  width: 100%;
+
+  & button {
+    margin-left: 25px;
+  }
 }
 
 .filter {
@@ -68,6 +74,7 @@
 
   &_lupa_name {
     margin-right: auto;
+    width: 100%;
 
     &::placeholder {
       color: #AFADB5;
