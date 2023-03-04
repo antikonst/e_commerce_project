@@ -1,17 +1,5 @@
+import { LoaderProps, LoaderSize, sizes } from "@entities/loader/client";
 import "./styles.css";
-
-export enum LoaderSize {
-  s = "s",
-  m = "m",
-  l = "l",
-}
-
-export type LoaderProps = {
-  loading?: boolean;
-  size?: LoaderSize;
-  className?: string;
-  children?: any;
-};
 
 export const Loader = ({
   loading = true,
@@ -19,21 +7,6 @@ export const Loader = ({
   className,
   children,
 }: LoaderProps) => {
-  const sizes = {
-    s: {
-      diametr: "14px",
-      border: "3px",
-    },
-    m: {
-      diametr: "32px",
-      border: "4px",
-    },
-    l: {
-      diametr: "48px",
-      border: "6px",
-    },
-  };
-
   const loaderStyles = {
     width: sizes[size].diametr,
     height: sizes[size].diametr,
@@ -47,3 +20,4 @@ export const Loader = ({
     </div>
   ) : null;
 };
+export { LoaderSize };

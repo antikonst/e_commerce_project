@@ -6,7 +6,7 @@ export const PageName = () => {
   const route = useMatch("/:id");
   const path = route ? route.pathname : "/product";
 
-  const pathes: any = {
+  const pathes: Record<string, string> = {
     "/product": "Products",
     "/aboutus": "About Us",
     "/categories": "Categories",

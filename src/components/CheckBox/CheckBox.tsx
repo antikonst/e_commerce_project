@@ -12,34 +12,32 @@ export type CheckBoxProps = Omit<
   onChange: (value: boolean) => void;
 };
 
-export const CheckBox: React.FC<CheckBoxProps> = ({
-  checked,
-  onChange,
-  ...props
-}: CheckBoxProps) => {
-  const handleChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      onChange(event.target.checked);
-    },
-    [onChange]
-  );
+export const CheckBox: React.FC<CheckBoxProps> = React.memo(
+  ({ checked, onChange, ...props }: CheckBoxProps) => {
+    const handleChange = React.useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>): void => {
+        onChange(event.target.checked);
+      },
+      [onChange]
+    );
 
-  return (
-    <>
-      <input
-        {...props}
-        id="checkbox"
-        type="checkbox"
-        checked={checked}
-        onChange={handleChange}
-        className={cn(
-          "checkbox",
-          styles["checkbox"],
-          props.disabled && styles["checkbox_disabled"],
-          props.className
-        )}
-      />
-      <label className="label_disabled" htmlFor="checkbox"></label>
-    </>
-  );
-};
+    return (
+      <>
+        <input
+          {...props}
+          id="checkbox"
+          type="checkbox"
+          checked={checked}
+          onChange={handleChange}
+          className={cn(
+            "checkbox",
+            styles["checkbox"],
+            props.disabled && styles["checkbox_disabled"],
+            props.className
+          )}
+        />
+        <label className="label_disabled" htmlFor="checkbox"></label>
+      </>
+    );
+  }
+);

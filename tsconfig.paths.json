@@ -9,7 +9,8 @@
       "@func/*": ["src/func/*"],
       "@utilities/*": ["src/utilities/*"],
       "@pages/*": ["src/pages/*"],
-      "@context/*": ["src/context/*"]
+      "@context/*": ["src/context/*"],
+      "@entities/*": ["src/entities/*"]
     }
   }
 }

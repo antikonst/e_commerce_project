@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useContext, useEffect } from "react";
 
 import { Button } from "@components/Button/Button";
@@ -19,7 +19,7 @@ type CardCurrentProdProps = {
 };
 
 export const CardCurrentProd = () => {
-  const { toggleProduct, idProd } = useContext<any>(ProductContext);
+  const { idProd } = useContext<any>(ProductContext);
   const [prod, setProd] = useState<CardCurrentProdProps>();
 
   const fetch = async () => {

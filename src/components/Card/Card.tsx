@@ -16,29 +16,37 @@ export type CardProps = {
   category?: string;
   price: number;
   classnames?: string | string[];
+  classnamesimg?: string | string[];
   /** Клик на карточку */
   onClick?: React.MouseEventHandler;
 };
 
-export const Card: React.FC<CardProps> = ({
-  image,
-  title,
-  subtitle,
-  content,
-  category,
-  price,
-  onClick,
-  classnames,
-}: CardProps) => {
-  return (
-    <div onClick={onClick} className={`${styles.card} ${classnames} card`}>
-      <img src={image} alt="card" className={styles.card_image} />
-      <div className={styles.card_content}>
-        <span className={styles.card_category}>{category}</span>
-        <span className={styles.card_title}>{title}</span>
-        <span className={styles.card_subtitle}>{subtitle}</span>
-        <span className={styles.card_price}>{formatCurrency(price)}</span>
+export const Card: React.FC<CardProps> = React.memo(
+  ({
+    image,
+    title,
+    subtitle,
+    content,
+    category,
+    price,
+    onClick,
+    classnames,
+    classnamesimg,
+  }: CardProps) => {
+    return (
+      <div onClick={onClick} className={`${styles.card} ${classnames} card`}>
+        <img
+          src={image}
+          alt="card"
+          className={`${styles.card_image}  ${classnamesimg}`}
+        />
+        <div className={styles.card_content}>
+          <span className={styles.card_category}>{category}</span>
+          <span className={styles.card_title}>{title}</span>
+          <span className={styles.card_subtitle}>{subtitle}</span>
+          <span className={styles.card_price}>{formatCurrency(price)}</span>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);

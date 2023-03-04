@@ -20,3 +20,12 @@ html, body {
   transition: all 1.5s;
   transform: translateY(0%);
 }
+
+a {
+  text-decoration: none;
+}
+
+$primary-color: #518581;
+$slider-buttons-color: rgba(0, 0, 0, 0.8);
+$slider-buttons-active-color: #151411;
+$font-disabled-color: #AFADB5;

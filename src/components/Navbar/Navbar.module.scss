@@ -1,3 +1,5 @@
+@import "../../styles/styles.scss";
+
 .navbar {
   height: 120px;
   flex-direction: row;
@@ -34,7 +36,7 @@
     color: #151411;
 
     &:hover {
-      color: #518581;
+      color: $primary-color;
     }
 
     &_active {
@@ -43,10 +45,10 @@
       font-weight: 500;
       font-size: 18px;
       line-height: 180%;
-      color: #518581;
+      color: $primary-color;
       padding: 47px 0;
       margin: 30px;
-      border-bottom: 3px solid #518581;
+      border-bottom: 3px solid $primary-color;
     }
   }
 }

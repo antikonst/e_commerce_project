@@ -1,3 +1,5 @@
+@import "../../styles/styles.scss";
+
 .CSSgal {
   position: relative;
   overflow: hidden;
@@ -40,7 +42,7 @@
 }
  
 .CSSgal .prevNext button {
-  background: #151411;
+  background: $slider-buttons-active-color;
   position: absolute;
   width: 64px;
   height: 64px;
@@ -152,15 +154,40 @@
 .CSSgal button {
   border-radius: 50%;
   margin: 0 3px;
-  color: rgba(0, 0, 0, 0.8);
+  color: $slider-buttons-color;
   text-decoration: none;
 }
 
 @media (max-width: 1000px) {
+
   .CSSgal .prevNext button {
     width: 40px;
     height: 40px;
     line-height: 40px;
-    margin: 24px;
+    margin: 0 16px;
+  }
+
+  #prev {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    top: 15px;
+    left: 16px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
+  #next {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    top: 15px;
+    left: 14px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-225deg);
   }
 }

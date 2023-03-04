@@ -10,35 +10,32 @@ export type ButtonProps = React.PropsWithChildren<{
 }> &
   React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button: React.FC<ButtonProps> = ({
-  children = "Cancel",
-  loading,
-  onClick = () => null,
-  ...props
-}) => {
-  const disabled = props.disabled || loading;
+export const Button: React.FC<ButtonProps> = React.memo(
+  ({ children = "Cancel", loading, onClick = () => null, ...props }) => {
+    const disabled = props.disabled || loading;
 
-  return (
-    <button
-      {...props}
-      onClick={onClick}
-      disabled={disabled}
-      className={cn(
-        "button",
-        props.className,
-        styles.button,
-        disabled && styles[`button_disabled`],
-        loading && styles["button_loader"]
-      )}
-    >
-      {loading && (
-        <Loader
-          size={LoaderSize.s}
-          loading={loading}
-          className={styles.btnLoader}
-        />
-      )}
-      {children}
-    </button>
-  );
-};
+    return (
+      <button
+        {...props}
+        onClick={onClick}
+        disabled={disabled}
+        className={cn(
+          "button",
+          props.className,
+          styles.button,
+          disabled && styles[`button_disabled`],
+          loading && styles["button_loader"]
+        )}
+      >
+        {loading && (
+          <Loader
+            size={LoaderSize.s}
+            loading={loading}
+            className={styles.btnLoader}
+          />
+        )}
+        {children}
+      </button>
+    );
+  }
+);

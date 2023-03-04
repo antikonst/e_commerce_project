@@ -1,13 +1,17 @@
-import { useEffect, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useState } from "react";
 
 import styles from "./Slider.module.scss";
-import "./style.css";
 
 type SliderProps = {
   images?: string[];
   classnames?: string | string[];
 };
+
+interface PropsBtn {
+  idn: string;
+  onclick: () => void;
+}
 
 export const Slider = ({ images, classnames }: SliderProps) => {
   const sliderRef = useRef<any>(null);
@@ -21,37 +25,39 @@ export const Slider = ({ images, classnames }: SliderProps) => {
 
   useEffect(() => {
     ar?.remove(...ar);
-    ar?.add("slider");
-    ar?.add(`next${cur}`);
+    ar?.add(styles.slider);
+    ar?.add(styles[`next${cur}`]);
   }, [cur]);
+
+  const PrevNextBtn: FC<PropsBtn> = ({ idn, onclick }) => {
+    return (
+      <button onClick={onclick}>
+        <div id={idn}></div>
+      </button>
+    );
+  };
 
   const prevNextJs = (
     <div>
-      <button
-        onClick={() => {
-          setCur(cur === 1 ? num : cur - 1);
-        }}
-      >
-        <div id="prev"></div>
-      </button>
-      <button
-        onClick={() => {
-          setCur(cur === num ? 1 : cur + 1);
-        }}
-      >
-        <div id="next"></div>
-      </button>
+      <PrevNextBtn
+        idn={styles.prev}
+        onclick={() => setCur(cur === 1 ? num : cur - 1)}
+      />
+      <PrevNextBtn
+        idn={styles.next}
+        onclick={() => setCur(cur === num ? 1 : cur + 1)}
+      />
     </div>
   );
   const gal = images?.map((img, i) => <s key={i} id={`s${i + 1}`}></s>);
 
   return (
-    <div className={`CSSgal ${classnames}`}>
+    <div className={`${styles.CSSgal} ${classnames}`}>
       {gal}
-      <div ref={sliderRef} className="slider">
+      <div ref={sliderRef} className={styles.slider}>
         {sliderImgs}
       </div>
-      <div className="prevNext">{prevNextJs}</div>
+      <div className={styles.prevNext}>{prevNextJs}</div>
     </div>
   );
 };

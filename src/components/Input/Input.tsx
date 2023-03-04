@@ -14,31 +14,29 @@ export type InputProps = Omit<
   onChange: (value: string) => void;
 };
 
-export const Input: React.FC<InputProps> = ({
-  value,
-  onChange,
-  ...props
-}: InputProps) => {
-  const handleChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      onChange(event.target.value);
-    },
-    [onChange]
-  );
+export const Input: React.FC<InputProps> = React.memo(
+  ({ value, onChange, ...props }: InputProps) => {
+    const handleChange = React.useCallback(
+      (event: React.ChangeEvent<HTMLInputElement>): void => {
+        onChange(event.target.value);
+      },
+      [onChange]
+    );
 
-  return (
-    <input
-      id="input"
-      {...props}
-      type="text"
-      value={value}
-      onChange={handleChange}
-      className={cn(
-        "input",
-        styles["input"],
-        props.disabled && styles["input_disabled"],
-        props.className
-      )}
-    />
-  );
-};
+    return (
+      <input
+        id="input"
+        {...props}
+        type="text"
+        value={value}
+        onChange={handleChange}
+        className={cn(
+          "input",
+          styles["input"],
+          props.disabled && styles["input_disabled"],
+          props.className
+        )}
+      />
+    );
+  }
+);

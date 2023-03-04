@@ -7,6 +7,7 @@ import { PageName } from "@components/PageName";
 import { ProductContext } from "@context/context";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 
 import styles from "./AllProducts.module.scss";
 import filter from "../imgs/filter.svg";
@@ -48,10 +49,10 @@ export const AllProducts = () => {
     setRelatedI(filterAx);
   };
 
-  const [itemsForInfinity, setItemsForInfinity] = useState(
-    itemsInf.map((item: any) => {
-      return (
-        <div key={item.id} className={`${styles.products_row_col} `}>
+  const block = (item: any) => {
+    return (
+      <div key={item.id} className={`${styles.products_row_col} `}>
+        <Link to={"/:" + item.id}>
           <Card
             classnames={styles.proucts_card}
             category={item.category}
@@ -65,41 +66,25 @@ export const AllProducts = () => {
             }
             price={item.price}
             onClick={() => {
-              toggleProduct();
               setIdProd(item.id);
               axProdfilter(item.id);
             }}
           />
-        </div>
-      );
+        </Link>
+      </div>
+    );
+  };
+
+  const [itemsForInfinity, setItemsForInfinity] = useState(
+    itemsInf.map((item: any) => {
+      return block(item);
     })
   );
 
   useEffect(() => {
     setItemsForInfinity(
       itemsInf.map((item: any) => {
-        return (
-          <div key={item.id} className={`${styles.products_row_col} `}>
-            <Card
-              classnames={styles.proucts_card}
-              category={item.category}
-              image={item.imgUrl}
-              title={
-                item.title.slice(0, window.innerWidth > 1000 ? 20 : 15) + "..."
-              }
-              subtitle={
-                item.description.slice(0, window.innerWidth > 1000 ? 30 : 20) +
-                "..."
-              }
-              price={item.price}
-              onClick={() => {
-                toggleProduct();
-                setIdProd(item.id);
-                axProdfilter(item.id);
-              }}
-            />
-          </div>
-        );
+        return block(item);
       })
     );
   }, [itemsInf]);
