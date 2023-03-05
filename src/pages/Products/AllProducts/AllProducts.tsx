@@ -101,6 +101,44 @@ export const AllProducts = () => {
     }, 1500);
   };
 
+  const [resultSearch, setResultSearch] = useState<any>([]);
+
+  const search_of_title = (input_title: string) => {
+    const res = itemsInf.filter((t: any) =>
+      t.title.toLowerCase().includes(input_title)
+    );
+    setResultSearch(
+      res.map((item: any) => {
+        return block(item);
+      })
+    );
+  };
+
+  const infinitescroll = (
+    <InfiniteScroll
+      dataLength={state.length}
+      next={fetchData}
+      hasMore={true}
+      loader={<h4>Loading...</h4>}
+      endMessage={
+        <p style={{ textAlign: "center" }}>
+          <b>Yay! You have seen it all</b>
+        </p>
+      }
+      refreshFunction={fetchData}
+      pullDownToRefresh
+      pullDownToRefreshThreshold={50}
+      pullDownToRefreshContent={
+        <h3 style={{ textAlign: "center" }}>&#8595; Pull down to refresh</h3>
+      }
+      releaseToRefreshContent={
+        <h3 style={{ textAlign: "center" }}>&#8593; Release to refresh</h3>
+      }
+    >
+      <div className={styles.products_row}>{state}</div>
+    </InfiniteScroll>
+  );
+
   return (
     <div>
       <PageName />
@@ -111,17 +149,25 @@ export const AllProducts = () => {
         </div>
         <div className={styles.menu}>
           <div className={styles.search}>
-            <button>
+            <button onClick={() => search_of_title(inputSearch)}>
               <img src={lupa} />
             </button>
             <Input
               placeholder="Search property"
               className={styles.menu_lupa_name}
               value={inputSearch}
-              onChange={(e: any) => setInputSearch(e)}
+              onChange={(e: any) => setInputSearch(e.toLowerCase())}
               onClick={() => setInputSearch("")}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  search_of_title(inputSearch);
+                }
+              }}
             />
-            <Button className={styles.button_find_now}>
+            <Button
+              className={styles.button_find_now}
+              onClick={() => search_of_title(inputSearch)}
+            >
               <span>Find&nbsp;Now</span>
             </Button>
           </div>
@@ -134,30 +180,11 @@ export const AllProducts = () => {
           <div className={styles.total_title}>Total Product</div>
           <div className={styles.total_num}>{num}</div>
         </div>
-        <InfiniteScroll
-          dataLength={state.length}
-          next={fetchData}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
-          endMessage={
-            <p style={{ textAlign: "center" }}>
-              <b>Yay! You have seen it all</b>
-            </p>
-          }
-          refreshFunction={fetchData}
-          pullDownToRefresh
-          pullDownToRefreshThreshold={50}
-          pullDownToRefreshContent={
-            <h3 style={{ textAlign: "center" }}>
-              &#8595; Pull down to refresh
-            </h3>
-          }
-          releaseToRefreshContent={
-            <h3 style={{ textAlign: "center" }}>&#8593; Release to refresh</h3>
-          }
-        >
-          <div className={styles.products_row}>{state}</div>
-        </InfiniteScroll>
+        {resultSearch.length > 0 ? (
+          <div className={styles.products_row}>{resultSearch}</div>
+        ) : (
+          infinitescroll
+        )}
       </div>
     </div>
   );
