@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Button } from "@components/Button/Button";
 import { Card } from "@components/Card/Card";
 import { Input } from "@components/Input/Input";
+import { MultiDropdown } from "@components/MultiDropdown/MultiDropdown";
 import { PageName } from "@components/PageName";
 import { ProductContext } from "@context/context";
 import axios from "axios";
@@ -19,6 +20,7 @@ export const AllProducts = () => {
 
   const [inputSearch, setInputSearch] = useState("Search property");
   const [itemsInf, setItemsInf] = useState<any>([]);
+  const [categorys, setCategorys] = useState<any>([]);
   const num = itemsInf.length;
 
   const fetch = async () => {
@@ -26,10 +28,10 @@ export const AllProducts = () => {
       method: "get",
       url: "https://api.escuelajs.co/api/v1/products",
     });
-
     setItemsInf(
       result.data.map((item: any) => ({
         category: item.category.name,
+        categoryId: item.category.id,
         id: item.id,
         title: item.title,
         imgUrl: item.images[0],
@@ -39,8 +41,23 @@ export const AllProducts = () => {
     );
   };
 
+  const fetchCategorys = async () => {
+    const result = await axios({
+      method: "get",
+      url: "https://api.escuelajs.co/api/v1/categories",
+    });
+    setCategorys(
+      result.data.map((item: any) => ({
+        key: item.name,
+        value: item.name,
+        id: item.id,
+      }))
+    );
+  };
+
   useEffect(() => {
     fetch();
+    fetchCategorys();
   }, []);
 
   const axProdfilter = (id: any) => {
@@ -114,6 +131,15 @@ export const AllProducts = () => {
     );
   };
 
+  const filter_category_id = (cat_id: string) => {
+    const res = itemsInf.filter((t: any) => t.categoryId === cat_id);
+    setResultSearch(
+      res.map((item: any) => {
+        return block(item);
+      })
+    );
+  };
+
   const infinitescroll = (
     <InfiniteScroll
       dataLength={state.length}
@@ -171,10 +197,20 @@ export const AllProducts = () => {
               <span>Find&nbsp;Now</span>
             </Button>
           </div>
-          <div className={styles.filter}>
-            <img src={filter} className={styles.menu_filter} />
-            <div className={styles.menu_filter_name}>Filter</div>
-          </div>
+          <MultiDropdown
+            classnames={styles.multi}
+            stylestitle={styles.multititle}
+            options={categorys}
+            value={[]}
+            onChange={(value: any) => filter_category_id(value[0].id)}
+            pluralizeOptions={() => ""}
+            element={
+              <div className={styles.filter}>
+                <img src={filter} className={styles.menu_filter} />
+                <div className={styles.menu_filter_name}>Filter</div>
+              </div>
+            }
+          />
         </div>
         <div className={styles.total}>
           <div className={styles.total_title}>Total Product</div>

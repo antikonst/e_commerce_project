@@ -23,6 +23,9 @@ export type MultiDropdownProps = {
   disabled?: boolean;
   /** Преобразовать выбранные значения в строку. Отображается в дропдауне в качестве выбранного значения */
   pluralizeOptions: (value: Option[]) => string;
+  element?: any;
+  classnames?: string | string[];
+  stylestitle?: string | string[];
 };
 
 export const MultiDropdown: React.FC<MultiDropdownProps> = ({
@@ -31,8 +34,12 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
   onChange,
   disabled,
   pluralizeOptions,
+  element,
+  classnames,
+  stylestitle,
 }: MultiDropdownProps) => {
-  const title = React.useMemo(() => pluralizeOptions(value), [value]);
+  const plu = React.useMemo(() => pluralizeOptions(value), [value]);
+  const title = element;
   const [opened, setOpened] = React.useState(false);
   const toggle = React.useCallback(
     () => !disabled && setOpened(!opened),
@@ -89,14 +96,17 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
 
   return (
     <div
-      className={cn(
+      className={`${cn(
         "multi-dropdown",
         styles["multi-dropdown"],
         disabled && styles["multi-dropdown_disabled"]
-      )}
+      )} ${classnames}`}
       onBlur={close}
     >
-      <div className={styles["multi-dropdown__control"]} onClick={toggle}>
+      <div
+        className={`${styles["multi-dropdown__control"]} ${stylestitle}`}
+        onClick={toggle}
+      >
         {title}
       </div>
       {isOpened && (
@@ -110,7 +120,10 @@ export const MultiDropdown: React.FC<MultiDropdownProps> = ({
               )}
               data-key={key}
               key={key}
-              onClick={onSelect}
+              onClick={(q) => {
+                onSelect(q);
+                toggle();
+              }}
             >
               {value}
             </div>
