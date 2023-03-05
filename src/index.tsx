@@ -1,4 +1,5 @@
 import React from "react";
+import "./config/configureMobX.ts";
 
 import ReactDOM from "react-dom/client";
 

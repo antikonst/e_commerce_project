@@ -18,7 +18,7 @@
     }
 
     &__control {
-        width: 370px;
+        width: auto;
         height: 86px;
         padding: 26px 27px;
         //border: 1px solid #ffffff;
@@ -35,14 +35,17 @@
     &__options {
         position: absolute;
         top: 98px;
+        right: 0;
         //margin-top: 5px;
         //border: 1px solid #bbb;
         max-height: 191px;
-        width: 370px;
+        width: auto;
         overflow-y: auto;
         display: flex;
         flex-direction: column;
         box-shadow: 0px 4px 120px rgba(175, 173, 181, 0.15);
+        background-color: white;
+        z-index: 22;
     }
 
     &__item {

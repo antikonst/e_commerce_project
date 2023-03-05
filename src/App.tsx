@@ -5,6 +5,7 @@ import { ProductContext } from "@context/context";
 import { AboutUs } from "@pages/AboutUs";
 import { Categories } from "@pages/Categories";
 import { Products } from "@pages/Products";
+import { AllProdsMobx } from "@pages/Products/AllProdsMobx";
 import { AllProducts } from "@pages/Products/AllProducts";
 import { DetailProduct } from "@pages/Products/DetailProduct";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -35,6 +36,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<AllProducts />} />
+          {/* <Route path="/" element={<AllProdsMobx />} /> */}
           <Route path="/:id" element={<DetailProduct />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/aboutus" element={<AboutUs />} />

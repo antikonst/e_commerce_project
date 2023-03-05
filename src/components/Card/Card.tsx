@@ -19,6 +19,7 @@ export type CardProps = {
   classnamesimg?: string | string[];
   /** Клик на карточку */
   onClick?: React.MouseEventHandler;
+  onKeyDown?: React.KeyboardEventHandler;
 };
 
 export const Card: React.FC<CardProps> = React.memo(
@@ -30,11 +31,16 @@ export const Card: React.FC<CardProps> = React.memo(
     category,
     price,
     onClick,
+    onKeyDown,
     classnames,
     classnamesimg,
   }: CardProps) => {
     return (
-      <div onClick={onClick} className={`${styles.card} ${classnames} card`}>
+      <div
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+        className={`${styles.card} ${classnames} card`}
+      >
         <img
           src={image}
           alt="card"
