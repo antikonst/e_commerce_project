@@ -10,7 +10,9 @@
       "@utilities/*": ["src/utilities/*"],
       "@pages/*": ["src/pages/*"],
       "@context/*": ["src/context/*"],
-      "@entities/*": ["src/entities/*"]
+      "@entities/*": ["src/entities/*"],
+      "@api/*": ["src/api/*"],
+      "@store/*": ["src/store/*"]
     }
   }
 }
