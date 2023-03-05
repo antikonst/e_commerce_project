@@ -1,8 +1,8 @@
+import { fetchProducts } from "@api/fetchProducts";
 import { action, makeObservable, observable } from "mobx";
-import { fetchProducts } from "src/api/fetchProducts";
 
 export interface prodItem {
-  id: string;
+  id: number;
   category: string;
   categoryId: number;
   title: string;

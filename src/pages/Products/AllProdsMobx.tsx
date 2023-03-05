@@ -12,6 +12,7 @@ export const AllProdsMobx = () => {
 
   useEffect(() => {
     prodStore.loadProds();
+    console.log(prodStore.prods);
   }, []);
 
   const axProdfilter = (id: any) => {
@@ -22,27 +23,37 @@ export const AllProdsMobx = () => {
     setRelatedI(filterAx);
   };
 
-  return prodStore.prods.map((item: any) => {
-    <div key={item.id} className={`${styles.products_row_col} `}>
-      <Link to={"/:" + item.id}>
-        <Card
-          classnames={styles.proucts_card}
-          category={item.category}
-          image={item.imgUrl}
-          title={
-            item.title.slice(0, window.innerWidth > 1000 ? 20 : 15) + "..."
-          }
-          subtitle={
-            item.description.slice(0, window.innerWidth > 1000 ? 30 : 20) +
-            "..."
-          }
-          price={item.price}
-          onClick={() => {
-            setIdProd(item.id);
-            axProdfilter(item.id);
-          }}
-        />
-      </Link>
-    </div>;
-  });
+  const block = (item: any) => {
+    return (
+      <div key={item.id} className={`${styles.products_row_col} `}>
+        <Link to={"/:" + item.id}>
+          <Card
+            classnames={styles.proucts_card}
+            category={item.category}
+            image={item.imgUrl}
+            title={
+              item.title.slice(0, window.innerWidth > 1000 ? 20 : 15) + "..."
+            }
+            subtitle={
+              item.description.slice(0, window.innerWidth > 1000 ? 30 : 20) +
+              "..."
+            }
+            price={item.price}
+            onClick={() => {
+              setIdProd(item.id);
+              axProdfilter(item.id);
+            }}
+          />
+        </Link>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      {prodStore.prods.map((item: any) => {
+        return block(item);
+      })}
+    </div>
+  );
 };
