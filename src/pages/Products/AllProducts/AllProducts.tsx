@@ -6,7 +6,11 @@ import { Input } from "@components/Input/Input";
 import { MultiDropdown } from "@components/MultiDropdown/MultiDropdown";
 import { PageName } from "@components/PageName";
 import { ProductContext } from "@context/context";
+import allProductsStore from "@store/allProductsStore";
+import categorysStore from "@store/categorysStore";
 import axios from "axios";
+import { action } from "mobx";
+import { observer } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 
@@ -14,55 +18,26 @@ import styles from "./AllProducts.module.scss";
 import filter from "../imgs/filter.svg";
 import lupa from "../imgs/lupa.svg";
 
-export const AllProducts = () => {
+export const AllProducts = observer(() => {
   const { toggleProduct, setIdProd, setRelatedI } =
     useContext<any>(ProductContext);
 
   const [inputSearch, setInputSearch] = useState("Search property");
-  const [itemsInf, setItemsInf] = useState<any>([]);
-  const [categorys, setCategorys] = useState<any>([]);
-  const num = itemsInf.length;
+  const num = allProductsStore.allProds.length;
 
-  const fetch = async () => {
-    const result = await axios({
-      method: "get",
-      url: "https://api.escuelajs.co/api/v1/products",
-    });
-    setItemsInf(
-      result.data.map((item: any) => ({
-        category: item.category.name,
-        categoryId: item.category.id,
-        id: item.id,
-        title: item.title,
-        imgUrl: item.images[0],
-        price: item.price,
-        description: item.description,
-      }))
-    );
-  };
-
-  const fetchCategorys = async () => {
-    const result = await axios({
-      method: "get",
-      url: "https://api.escuelajs.co/api/v1/categories",
-    });
-    setCategorys(
-      result.data.map((item: any) => ({
-        key: item.name,
-        value: item.name,
-        id: item.id,
-      }))
-    );
-  };
-
-  useEffect(() => {
-    fetch();
-    fetchCategorys();
-  }, []);
+  useEffect(
+    action(() => {
+      allProductsStore.fetch();
+      categorysStore.fetch();
+    }),
+    []
+  );
 
   const axProdfilter = (id: any) => {
-    const elId = itemsInf?.find((i: any) => i.id === id);
-    const filterAx = itemsInf?.filter((i: any) => i.category === elId.category);
+    const elId: any = allProductsStore.allProds?.find((i: any) => i.id === id);
+    const filterAx = allProductsStore.allProds?.filter(
+      (i: any) => i.category === elId.category
+    );
     setRelatedI(filterAx);
   };
 
@@ -93,18 +68,18 @@ export const AllProducts = () => {
   };
 
   const [itemsForInfinity, setItemsForInfinity] = useState(
-    itemsInf.map((item: any) => {
+    allProductsStore.allProds.map((item: any) => {
       return block(item);
     })
   );
 
   useEffect(() => {
     setItemsForInfinity(
-      itemsInf.map((item: any) => {
+      allProductsStore.allProds.map((item: any) => {
         return block(item);
       })
     );
-  }, [itemsInf]);
+  }, [allProductsStore.allProds]);
 
   const [state, setState] = useState(itemsForInfinity.slice(0, 6));
 
@@ -121,7 +96,7 @@ export const AllProducts = () => {
   const [resultSearch, setResultSearch] = useState<any>([]);
 
   const search_of_title = (input_title: string) => {
-    const res = itemsInf.filter((t: any) =>
+    const res = allProductsStore.allProds.filter((t: any) =>
       t.title.toLowerCase().includes(input_title)
     );
     setResultSearch(
@@ -132,7 +107,9 @@ export const AllProducts = () => {
   };
 
   const filter_category_id = (cat_id: string) => {
-    const res = itemsInf.filter((t: any) => t.categoryId === cat_id);
+    const res = allProductsStore.allProds.filter(
+      (t: any) => t.categoryId === cat_id
+    );
     setResultSearch(
       res.map((item: any) => {
         return block(item);
@@ -200,7 +177,7 @@ export const AllProducts = () => {
           <MultiDropdown
             classnames={styles.multi}
             stylestitle={styles.multititle}
-            options={categorys}
+            options={categorysStore.categorys}
             value={[]}
             onChange={(value: any) => filter_category_id(value[0].id)}
             pluralizeOptions={() => ""}
@@ -224,4 +201,4 @@ export const AllProducts = () => {
       </div>
     </div>
   );
-};
+});
